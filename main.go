@@ -3,17 +3,35 @@ package main
 import (
 	"fmt"
 	"strconv"
+	"strings"
 	"unicode"
 )
 
 func main() {
-	str := "3abcd"
+	str := "a4bc2d5e"
 	fmt.Println("unpack string")
 	res := unpack(str)
 	fmt.Println(res)
 }
 
+func repeat(s string, n int) string {
+
+	if len(s) > 1 {
+		return ""
+	}
+
+	chars := make([]string, n)
+
+	for i := 0; i < n; i++ {
+		chars[i] = s
+	}
+
+	return strings.Join(chars[:], "")
+}
+
 func unpack(s string) string {
+
+	result := ""
 
 	if s == "" {
 		return s
@@ -34,10 +52,12 @@ func unpack(s string) string {
 			}
 
 			prev := string(s[i-1])
-			fmt.Println(n, prev)
-		}
 
+			result += repeat(prev, n)
+		} else {
+			result += string(r)
+		}
 	}
 
-	return s
+	return result
 }
