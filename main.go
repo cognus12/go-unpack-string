@@ -11,7 +11,7 @@ func main() {
 	str := "a4bc2d5e"
 	fmt.Println("unpack string")
 	res := unpack(str)
-	fmt.Println(res)
+	fmt.Printf("Given: %v, output: %v", str, res)
 }
 
 func repeat(s string, n int) string {
@@ -22,7 +22,7 @@ func repeat(s string, n int) string {
 
 	chars := make([]string, n)
 
-	for i := 0; i < n; i++ {
+	for i := 0; i < n-1; i++ {
 		chars[i] = s
 	}
 
@@ -46,12 +46,18 @@ func unpack(s string) string {
 			}
 
 			prevIdx := i - 1
+			nextIdx := i + 1
 
-			if prevIdx < 0 {
+			if prevIdx < 0 || nextIdx > len(s)-1 {
 				return ""
 			}
 
-			prev := string(s[i-1])
+			prev := string(s[prevIdx])
+			next := rune(s[nextIdx])
+
+			if unicode.IsDigit(next) {
+				return ""
+			}
 
 			result += repeat(prev, n)
 		} else {
