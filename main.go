@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	str := "a4bc2d5e"
+	str := "aaa0bawd4a"
 	fmt.Println("unpack string")
 	res := unpack(str)
 	fmt.Printf("Given: %v, output: %v", str, res)
@@ -56,8 +56,24 @@ func unpack(s string) string {
 			next := rune(s[nextIdx])
 
 			if unicode.IsDigit(next) {
+
 				return ""
 			}
+
+			// TODO handle 0
+
+			// if n == 0 {
+
+			// 	str := strings.Join(strings.Split(result, "")[:i-1], "")
+
+			// 	fmt.Println(str)
+
+			// 	result = str
+
+			// 	continue
+			// }
+
+			fmt.Printf("Repeated - %v \n", repeat(prev, n))
 
 			result += repeat(prev, n)
 		} else {
