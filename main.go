@@ -9,33 +9,30 @@ import (
 
 func main() {
 	str := "aaa0bawd4a"
-	fmt.Println("unpack string")
 	res := unpack(str)
 	fmt.Printf("Given: %v, output: %v", str, res)
 }
 
 func repeat(s string, n int) string {
 
+	if n == 0 {
+		return ""
+	}
+
 	if len(s) > 1 {
 		return ""
 	}
 
-	chars := make([]string, n)
-
-	for i := 0; i < n-1; i++ {
-		chars[i] = s
-	}
-
-	return strings.Join(chars[:], "")
+	return strings.Repeat(s, n-1)
 }
 
 func unpack(s string) string {
 
-	result := ""
-
 	if s == "" {
 		return s
 	}
+
+	b := strings.Builder{}
 
 	for i, r := range s {
 		if unicode.IsDigit(r) {
@@ -60,26 +57,22 @@ func unpack(s string) string {
 				return ""
 			}
 
-			// TODO handle 0
+			if n == 0 {
 
-			// if n == 0 {
+				current := b.String()
+				trimmed := strings.TrimSuffix(current, prev)
 
-			// 	str := strings.Join(strings.Split(result, "")[:i-1], "")
+				b.Reset()
+				b.WriteString(trimmed)
 
-			// 	fmt.Println(str)
+				continue
+			}
 
-			// 	result = str
-
-			// 	continue
-			// }
-
-			fmt.Printf("Repeated - %v \n", repeat(prev, n))
-
-			result += repeat(prev, n)
+			b.WriteString(repeat(prev, n))
 		} else {
-			result += string(r)
+			b.WriteString(string(r))
 		}
 	}
 
-	return result
+	return b.String()
 }

@@ -25,7 +25,7 @@ func TestUnpack(t *testing.T) {
 		if output := unpack(test.arg); output != test.expected {
 			t.Errorf("Fail: given %q, output %q not equal to expected %q", test.arg, output, test.expected)
 		} else {
-			t.Logf("Success: given %q, output %q is equal %q", test.arg, output, test.expected)
+			t.Logf("Success: given %q, output %q is equal to expected %q", test.arg, output, test.expected)
 		}
 	}
 }
