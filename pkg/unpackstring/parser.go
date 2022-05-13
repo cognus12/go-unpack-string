@@ -15,11 +15,7 @@ const CodeNumber = "num"
 func isEscaped(str *string, i int) bool {
 	prev := savePickByIndex(str, i-1)
 
-	if prev == BackslashRune {
-		return true
-	}
-
-	return false
+	return prev == BackslashRune
 }
 
 func checkSymbol(idx int, s *string) (code string, err error) {
@@ -51,18 +47,18 @@ func checkSymbol(idx int, s *string) (code string, err error) {
 		}
 
 		if unicode.IsDigit(next) {
-			return code, errors.New("Wrong string")
+			return code, errors.New("wrong string")
 		}
 
 		if prev == 0 {
-			return code, errors.New("Wrong string")
+			return code, errors.New("wrong string")
 		}
 
 		return CodeNumber, nil
 	}
 
 	if prevSymbol == BackslashChar {
-		return code, errors.New("Wrong string")
+		return code, errors.New("wrong string")
 	}
 
 	return code, nil
